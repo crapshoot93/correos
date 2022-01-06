@@ -6,9 +6,6 @@ from products import products
 
 app=Flask(__name__)
 
-if __name__ == "__main__":
-  app.run(debug=True, port=4000)
-
 @app.route('/')
 def entrada():
   return jsonify({"message": "Backend NSolar SPAM DE CORREOS consulta /clientes para ver datos. /clientes/(nombre_del_cliente) o /listaclientes"})
@@ -40,3 +37,5 @@ def addCliente():
       lista_clientes.append(new_cliente)
       return jsonify({"message": "Cliente Agregado exitosamente", "clientes":lista_clientes})
 
+if __name__ == "__main__":
+  app.run(debug=True, port=4000)
