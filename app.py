@@ -2,7 +2,7 @@ from flask import Flask,redirect,url_for,render_template,request
 from flask import jsonify
 
 from clientes import lista_clientes, lista_nombre_clientes
-from products import products
+from mailer import send_email
 
 app=Flask(__name__)
 
@@ -37,5 +37,14 @@ def addCliente():
       lista_clientes.append(new_cliente)
       return jsonify({"message": "Cliente Agregado exitosamente", "clientes":lista_clientes})
 
+@app.route('/sendMail', methods=['GET'])
+def sendMail():
+  print(request.args)
+  
+  recipientMail = request.args.get('recipientMail')
+  send_email(recipientMail)
+
+  return jsonify({"message": "Correo enviado exitosamente"})
+  
 if __name__ == "__main__":
   app.run(debug=True, port=4000)
